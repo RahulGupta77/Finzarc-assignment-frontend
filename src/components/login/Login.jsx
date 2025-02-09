@@ -9,12 +9,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { toast } from "sonner";
 
 const Login = () => {
-  const { toast } = useToast();
   const [tab, setTab] = useState("supervisior");
   const [formData, setFormData] = useState({
     supervisior: { name: "", password: "", phone: "" }, // Add phone field
@@ -45,37 +44,32 @@ const Login = () => {
     // Validate fields based on the selected tab
     if (tab === "supervisior") {
       if (!name || !password || !phone) {
-        toast({
-          title: "Error",
-          description: "All fields are required!",
-          variant: "destructive",
+        toast.error("Error", {
+          description: "All fields are required",
         });
         return;
       }
 
       // Validate phone number format (e.g., 10 digits)
       if (!/^\d{10}$/.test(phone)) {
-        toast({
-          title: "Error",
+        toast.error("Error", {
           description: "Phone number must be 10 digits!",
-          variant: "destructive",
         });
         return;
       }
     } else if (tab === "admin") {
       if (!name || !password) {
-        toast({
-          title: "Error",
-          description: "All fields are required!",
-          variant: "destructive",
+        toast.error("Error", {
+          description: "All fields are required",
         });
         return;
       }
     }
 
-    console.log("Logging in with:", formData[tab]);
     await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
-    alert("Login Successful!");
+    alert(
+      "Login Successful! Backend is under maintenence try again after sometime"
+    );
   };
 
   return (
