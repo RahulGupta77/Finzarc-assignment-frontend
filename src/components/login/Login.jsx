@@ -73,7 +73,7 @@ const Login = () => {
   };
 
   return (
-    <div className="mb-32">
+    <div className="h-[70vh] flex justify-center items-center">
       <Tabs
         defaultValue="supervisior"
         className="w-[400px]"
