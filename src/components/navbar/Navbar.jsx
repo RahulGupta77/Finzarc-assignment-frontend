@@ -1,27 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { MenuIcon } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-
-function MountainIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
-    </svg>
-  );
-}
 
 const Navbar = () => {
   const location = useLocation();
@@ -31,12 +12,10 @@ const Navbar = () => {
     setActiveLink(path);
   };
 
-  const navLinks = [
-    { to: "/", label: "Home" },
-    { to: "/about", label: "About" },
-    { to: "/services", label: "Services" },
-    { to: "/contact", label: "Contact" },
-  ];
+  const navLinks = [];
+  /*
+{ to: "/", label: "Home" }
+  */
 
   return (
     <header className="flex h-20 w-full shrink-0 items-center px-4 md:px-6 shadow-md bg-white">
@@ -50,8 +29,8 @@ const Navbar = () => {
         </SheetTrigger>
         <SheetContent side="left">
           <NavLink to="/" className="mr-6 hidden lg:flex">
-            <MountainIcon className="h-6 w-6" />
-            <span className="sr-only">Siddharth Enterprises</span>
+            <img src="./logo.png" alt="Just Todo It Icon" />
+            <span className="sr-only">Just Todo It</span>
           </NavLink>
           <div className="grid gap-2 py-6">
             {navLinks.map((link) => (
@@ -74,9 +53,15 @@ const Navbar = () => {
 
       {/* Logo */}
       <NavLink to="/" className="mr-6 hidden lg:flex">
-        <MountainIcon className="h-6 w-6" />
-        <span className="ml-5 font-semibold text-xl">
-          Siddharth Enterprises
+        <div className="h-[60px] w-[60px]">
+          <img
+            src="./logo.png"
+            alt="Just Todo It Icon"
+            className="object-contain"
+          />
+        </div>
+        <span className="ml-5 font-semibold flex items-center text-xl">
+          Just Todo It
         </span>
       </NavLink>
 
