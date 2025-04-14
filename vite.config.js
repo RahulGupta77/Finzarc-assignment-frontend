@@ -1,6 +1,10 @@
 import react from "@vitejs/plugin-react";
 import path from "path";
+import { fileURLToPath } from "url";
 import { defineConfig } from "vite";
+
+// Derive __dirname equivalent for ES modules
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 // https://vite.dev/config/
 export default defineConfig({
