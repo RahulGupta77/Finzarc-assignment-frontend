@@ -2,24 +2,34 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { MenuIcon } from "lucide-react";
 import { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [activeLink, setActiveLink] = useState(location.pathname);
 
   const handleClick = (path) => {
     setActiveLink(path);
   };
 
-  const navLinks = [];
-  /*
-{ to: "/", label: "Home" }
-  */
+  const handleLogout = () => {
+    document.cookie.split(";").forEach((cookie) => {
+      const name = cookie.split("=")[0].trim();
+      document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+    });
+
+    navigate("/");
+  };
+  const navLinks = [
+    // Add other links as needed
+    // { to: "/about", label: "About" },
+  ];
+
+  const showLogout = location.pathname === "/user";
 
   return (
     <header className="flex h-20 w-full shrink-0 items-center px-4 md:px-6 shadow-md bg-white">
-      {/* Mobile Menu */}
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="lg:hidden">
@@ -47,13 +57,22 @@ const Navbar = () => {
                 {link.label}
               </NavLink>
             ))}
+            {showLogout && (
+              <Button
+                variant="outline"
+                className="flex w-full items-center py-2 text-lg font-semibold text-red-600"
+                onClick={handleLogout}
+              >
+                Logout
+              </Button>
+            )}
           </div>
         </SheetContent>
       </Sheet>
 
       {/* Logo */}
       <NavLink to="/" className="mr-6 hidden lg:flex">
-        <div className="h-[60px] w-[60px]">
+        <div className="h-[60px] w-[60px] flex items-center">
           <img
             src="./logo.png"
             alt="Just Todo It Icon"
@@ -86,6 +105,15 @@ const Navbar = () => {
             {link.label}
           </NavLink>
         ))}
+        {showLogout && (
+          <Button
+            variant="outline"
+            className="text-red-600 hover:text-red-700"
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
+        )}
       </nav>
     </header>
   );
