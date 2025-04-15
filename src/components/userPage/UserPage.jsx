@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 
-const API_BASE = "http://localhost:8000/v1/task";
+const API_BASE = "https://finzarc.rahulgupta.tech/api/v1/task";
 
 const UserPage = () => {
   const [tasks, setTasks] = useState([]);
